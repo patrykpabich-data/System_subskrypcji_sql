@@ -1,0 +1,36 @@
+-- 1. RAPORT PRZYCHODÓW WEDŁUG PLANÓW ABONAMENTOWYCH
+-- Pozwala sprawdzić, który plan przynosi firmie największe zyski.
+
+SELECT pa.Nazwa_planu,
+COUNT(t.Id_transakcji) AS Liczba_transakcji,
+SUM(t.Kwota) AS Wszystkie_przychody
+FROM Plany_Abonamentowe pa
+JOIN Subskrypcje s ON pa.Id_planu = s.Id_planu
+JOIN Transakcje t ON s.Id_subskrypcji = t.Id_subskrypcji
+WHERE t.Status_transakcji = 'Opłacona'
+GROUP BY pa.Nazwa_planu
+ORDER BY Wszystkie_przychody DESC;
+
+-- 2. LISTA AKTYWNYCH KLIENTÓW I ICH METOD PŁATNOŚCI
+-- Wyciąga dane kontaktowe osób, które mają obecnie opłacony dostęp.
+
+
+SELECT u.Id_uzytkownika, u.Imie, u.Nazwisko, u.Email, mp.Nazwa_platnosci AS Metoda_Platnosci
+FROM Uzytkownicy u 
+JOIN Subskrypcje s ON u.Id_uzytkownika = s.Id_uzytkownika
+JOIN Transakcje t ON s.Id_subskrypcji = t.Id_subskrypcji
+JOIN Metody_Platnosci mp ON t.Id_metody = mp.Id_metody 
+WHERE s.Status = 'Aktywna'
+GROUP BY u.Id_uzytkownika 
+
+
+-- 3. ANALIZA NAJCZĘSTSZYCH BŁĘDÓW SYSTEMU PŁATNOŚCI
+-- Pomaga działowi technicznemu sprawdzić, jakie problemy występują przy transakcjach.
+
+SELECT lb.Kod_bledu, lb.Opis_bledu, 
+COUNT(*) AS Liczba_wystapien
+FROM Logi_bledow lb
+GROUP BY lb.Kod_bledu, lb.Opis_bledu
+ORDER BY Liczba_wystapien DESC;
+
+
