@@ -1,7 +1,7 @@
 # System_subskrypcji_sql
 Projekt bazy danych SQLite dla systemu zarządzania subskrypcjami użytkowników. Zawiera kompletną strukturę tabel, dane testowe, analityczne zapytania SQL oraz diagram ERD.
 
-![Diagram bazy danych](diagram.png)
+![Diagram bazy danych](IMG/diagram.png)
 
 <br><br>
 
@@ -12,6 +12,7 @@ Baza składa się z następujących tabel:
 - Subskrypcje: relacja łącząca użytkownika z planem, data rozpoczęcia/zakończenia oraz status.
 - Metody Płatności: słownik dostępnych form płatności (karta, BLIK, paypal).
 - Transakcje: historia wpłat powiązana z fakturowaniem i statusem płatności.
+- Faktury: dokumenty sprzedażowe powiązane z transakcjami, zawierające numery faktur, daty wystawienia oraz dane wystawcy.
 - Logi błędów: rejestr nieudanych operacji transakcyjnych do celów analitycznych.
 
 <br><br>
@@ -39,6 +40,7 @@ WHERE t.Status_transakcji = 'Opłacona'
 GROUP BY pa.Nazwa_planu
 ORDER BY Wszystkie_przychody DESC;
 ```
+![Przychody](IMG/Przychody.PNG)
 
 <br><br>
 
@@ -54,6 +56,9 @@ JOIN Metody_Platnosci mp ON t.Id_metody = mp.Id_metody
 WHERE s.Status = 'Aktywna'
 GROUP BY u.Id_uzytkownika 
 ```
+![Aktywni klienci](IMG/Aktywni_klienci.PNG)
+
+> Pełna lista zawiera więcej rekordów – powyższa grafika prezentuje jedynie początkowy fragment wyniku zapytania.
 
 <br><br>
 
@@ -67,4 +72,5 @@ FROM Logi_bledow lb
 GROUP BY lb.Kod_bledu, lb.Opis_bledu
 ORDER BY Liczba_wystapien DESC;
 ```
+![Bledy](IMG/Bledy.PNG)
 
