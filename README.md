@@ -39,6 +39,7 @@ WHERE t.Status_transakcji = 'Opłacona'
 GROUP BY pa.Nazwa_planu
 ORDER BY Wszystkie_przychody DESC;
 ```
+![Przychody](IMG/Przychody.PNG)
 
 <br><br>
 
@@ -54,6 +55,7 @@ JOIN Metody_Platnosci mp ON t.Id_metody = mp.Id_metody
 WHERE s.Status = 'Aktywna'
 GROUP BY u.Id_uzytkownika 
 ```
+![Aktywni klienci](IMG/Aktywni_klienci.PNG)
 
 <br><br>
 
@@ -67,4 +69,5 @@ FROM Logi_bledow lb
 GROUP BY lb.Kod_bledu, lb.Opis_bledu
 ORDER BY Liczba_wystapien DESC;
 ```
+![Bledy](IMG/Bledy.PNG)
 
