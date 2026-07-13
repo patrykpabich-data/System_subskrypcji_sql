@@ -74,3 +74,30 @@ ORDER BY Liczba_wystapien DESC;
 ```
 ![Bledy](IMG/Bledy.PNG)
 
+<br><br>
+
+*4. ANALIZA SEZONOWOŚCI REJESTRACJI*
+
+*Pomaga działowi marketingu sprawdzić, w których miesiącach rejestruje się najwięcej użytkowników.*
+```sql
+SELECT 
+CASE STRFTIME('%m', u.Data_rejestracji)
+WHEN '01' THEN 'Styczeń'
+WHEN '02' THEN 'Luty'
+WHEN '03' THEN 'Marzec'
+WHEN '04' THEN 'Kwiecień'
+WHEN '05' THEN 'Maj'
+WHEN '06' THEN 'Czerwiec'
+WHEN '07' THEN 'Lipiec'
+WHEN '08' THEN 'Sierpień'
+WHEN '09' THEN 'Wrzesień'
+WHEN '10' THEN 'Październik'
+WHEN '11' THEN 'Listopad'
+WHEN '12' THEN 'Grudzień'
+END AS Miesiac,
+COUNT(u.Id_uzytkownika) AS Liczba_nowych_uzytkownikow
+FROM Uzytkownicy u
+GROUP BY STRFTIME('%m', u.Data_rejestracji)
+ORDER BY Liczba_nowych_uzytkownikow DESC;
+```
+![nowi_uzytkownicy](IMG/Nowi_uzytkownicy.PNG)
