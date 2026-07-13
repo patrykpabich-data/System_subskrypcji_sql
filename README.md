@@ -57,6 +57,8 @@ GROUP BY u.Id_uzytkownika
 ```
 ![Aktywni klienci](IMG/Aktywni_klienci.PNG)
 
+> Pełna lista zawiera więcej rekordów – powyższa grafika prezentuje jedynie początkowy fragment wyniku zapytania.
+
 <br><br>
 
 *3. ANALIZA NAJCZĘSTSZYCH BŁĘDÓW SYSTEMU PŁATNOŚCI*
