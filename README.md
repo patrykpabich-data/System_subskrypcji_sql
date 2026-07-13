@@ -101,3 +101,21 @@ GROUP BY STRFTIME('%m', u.Data_rejestracji)
 ORDER BY Liczba_nowych_uzytkownikow DESC;
 ```
 ![nowi_uzytkownicy](IMG/Nowi_uzytkownicy.PNG)
+
+<br><br>
+
+*5. ANALIZA WSKAŹNIKA REZYGNACJI DLA PLANÓW*
+
+*Pomaga działowi produktu zidentyfikować plany abonamentowe, które najczęściej tracą klientów.*
+```sql
+SELECT p.Nazwa_planu,
+COUNT(s.Id_subskrypcji) AS Liczba_anulowanych_subskrypcji
+FROM Plany_Abonamentowe p
+JOIN Subskrypcje s ON p.Id_planu = s.Id_planu
+WHERE s.Status = 'Anulowana' 
+GROUP BY p.Nazwa_planu
+HAVING Liczba_anulowanych_subskrypcji > 1
+ORDER BY Liczba_anulowanych_subskrypcji DESC;
+```
+![anulowane](IMG/Anulowane.PNG)
+
