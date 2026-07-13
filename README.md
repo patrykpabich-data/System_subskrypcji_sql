@@ -12,6 +12,7 @@ Baza składa się z następujących tabel:
 - Subskrypcje: relacja łącząca użytkownika z planem, data rozpoczęcia/zakończenia oraz status.
 - Metody Płatności: słownik dostępnych form płatności (karta, BLIK, paypal).
 - Transakcje: historia wpłat powiązana z fakturowaniem i statusem płatności.
+- Faktury: dokumenty sprzedażowe powiązane z transakcjami, zawierające numery faktur, daty wystawienia oraz dane wystawcy.
 - Logi błędów: rejestr nieudanych operacji transakcyjnych do celów analitycznych.
 
 <br><br>
