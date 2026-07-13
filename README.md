@@ -18,8 +18,8 @@ Baza składa się z następujących tabel:
 <br><br>
 
 ## Jak uruchomić projekt lokalnie?
-1. Pobierz plik bazy danych Subskrypcje_i_Płatności_Cykliczne z tego repozytorium.
-2. Otwórz program DBeaver lub dowolny inny menedżer baz SQLite albo skorzystaj z darmowej przeglądarki online np. [SQLite Viewer Beta](https://beta.sqliteviewer.app/).
+1. Pobierz plik bazy danych **System_subskrypcji.sqlite** z tego repozytorium.
+2. Otwórz plik bazy za pomocą dowolnego menedżera baz SQLite lub skorzystaj z darmowej przeglądarki **online** np. [SQLite Viewer Beta](https://beta.sqliteviewer.app/).
 3. Utwórz nowe połączenie typu SQLite i wskaż pobrany plik bazy danych.
 4. Wszystkie tabele, relacje oraz wprowadzone dane testowe będą od razu widoczne i gotowe do analizy.
 
@@ -54,11 +54,11 @@ JOIN Subskrypcje s ON u.Id_uzytkownika = s.Id_uzytkownika
 JOIN Transakcje t ON s.Id_subskrypcji = t.Id_subskrypcji
 JOIN Metody_Platnosci mp ON t.Id_metody = mp.Id_metody 
 WHERE s.Status = 'Aktywna'
-GROUP BY u.Id_uzytkownika 
+GROUP BY u.Id_uzytkownika, u.Imie, u.Nazwisko, u.Email, mp.Nazwa_platnosci; 
 ```
 ![Aktywni klienci](IMG/Aktywni_klienci.PNG)
 
-> Pełna lista zawiera więcej rekordów – powyższa grafika prezentuje jedynie początkowy fragment wyniku zapytania.
+> Pełna lista zawiera więcej rekordów, powyższa grafika prezentuje jedynie początkowy fragment wyniku zapytania.
 
 <br><br>
 
@@ -74,3 +74,30 @@ ORDER BY Liczba_wystapien DESC;
 ```
 ![Bledy](IMG/Bledy.PNG)
 
+<br><br>
+
+*4. ANALIZA SEZONOWOŚCI REJESTRACJI*
+
+*Pomaga działowi marketingu sprawdzić, w których miesiącach rejestruje się najwięcej użytkowników.*
+```sql
+SELECT 
+CASE STRFTIME('%m', u.Data_rejestracji)
+WHEN '01' THEN 'Styczeń'
+WHEN '02' THEN 'Luty'
+WHEN '03' THEN 'Marzec'
+WHEN '04' THEN 'Kwiecień'
+WHEN '05' THEN 'Maj'
+WHEN '06' THEN 'Czerwiec'
+WHEN '07' THEN 'Lipiec'
+WHEN '08' THEN 'Sierpień'
+WHEN '09' THEN 'Wrzesień'
+WHEN '10' THEN 'Październik'
+WHEN '11' THEN 'Listopad'
+WHEN '12' THEN 'Grudzień'
+END AS Miesiac,
+COUNT(u.Id_uzytkownika) AS Liczba_nowych_uzytkownikow
+FROM Uzytkownicy u
+GROUP BY STRFTIME('%m', u.Data_rejestracji)
+ORDER BY Liczba_nowych_uzytkownikow DESC;
+```
+![nowi_uzytkownicy](IMG/Nowi_uzytkownicy.PNG)
