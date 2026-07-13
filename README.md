@@ -17,3 +17,18 @@ Baza składa się z następujących tabel:
 2. Otwórz program DBeaver lub dowolny inny menedżer baz SQLite albo skorzystaj z darmowej przeglądarki online np. [SQLite Viewer Beta](https://beta.sqliteviewer.app/).
 3. Utwórz nowe połączenie typu SQLite i wskaż pobrany plik bazy danych.
 4. Wszystkie tabele, relacje oraz wprowadzone dane testowe będą od razu widoczne i gotowe do analizy.
+
+# Przykłady gotowych zapytań SQL, które pozwalają na szybką analizę danych zgromadzonych w bazie:
+*1. RAPORT PRZYCHODÓW WEDŁUG PLANÓW ABONAMENTOWYCH*
+*Pozwala sprawdzić, który plan przynosi firmie największe zyski.*
+```sql
+SELECT pa.Nazwa_planu,
+COUNT(t.Id_transakcji) AS Liczba_transakcji,
+SUM(t.Kwota) AS Wszystkie_przychody
+FROM Plany_Abonamentowe pa
+JOIN Subskrypcje s ON pa.Id_planu = s.Id_planu
+JOIN Transakcje t ON s.Id_subskrypcji = t.Id_subskrypcji
+WHERE t.Status_transakcji = 'Opłacona'
+GROUP BY pa.Nazwa_planu
+ORDER BY Wszystkie_przychody DESC;
+```
