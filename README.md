@@ -54,7 +54,7 @@ JOIN Subskrypcje s ON u.Id_uzytkownika = s.Id_uzytkownika
 JOIN Transakcje t ON s.Id_subskrypcji = t.Id_subskrypcji
 JOIN Metody_Platnosci mp ON t.Id_metody = mp.Id_metody 
 WHERE s.Status = 'Aktywna'
-GROUP BY u.Id_uzytkownika 
+GROUP BY u.Id_uzytkownika, u.Imie, u.Nazwisko, u.Email, mp.Nazwa_platnosci; 
 ```
 ![Aktywni klienci](IMG/Aktywni_klienci.PNG)
 
