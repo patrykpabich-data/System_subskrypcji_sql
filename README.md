@@ -18,8 +18,9 @@ Baza składa się z następujących tabel:
 3. Utwórz nowe połączenie typu SQLite i wskaż pobrany plik bazy danych.
 4. Wszystkie tabele, relacje oraz wprowadzone dane testowe będą od razu widoczne i gotowe do analizy.
 
-# Przykłady gotowych zapytań SQL, które pozwalają na szybką analizę danych zgromadzonych w bazie:
-*1. RAPORT PRZYCHODÓW WEDŁUG PLANÓW ABONAMENTOWYCH*
+### Przykłady gotowych zapytań SQL, które pozwalają na szybką analizę danych zgromadzonych w bazie:
+*1. Raport przychodów według planów abonamentowych*
+
 *Pozwala sprawdzić, który plan przynosi firmie największe zyski.*
 ```sql
 SELECT pa.Nazwa_planu,
