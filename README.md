@@ -18,7 +18,7 @@ Baza składa się z następujących tabel:
 <br><br>
 
 ## Jak uruchomić projekt lokalnie?
-1. Pobierz plik bazy danych Subskrypcje_i_Płatności_Cykliczne z tego repozytorium.
+1. Pobierz plik bazy danych System_subskrypcji.sqlite z tego repozytorium.
 2. Otwórz program DBeaver lub dowolny inny menedżer baz SQLite albo skorzystaj z darmowej przeglądarki online np. [SQLite Viewer Beta](https://beta.sqliteviewer.app/).
 3. Utwórz nowe połączenie typu SQLite i wskaż pobrany plik bazy danych.
 4. Wszystkie tabele, relacje oraz wprowadzone dane testowe będą od razu widoczne i gotowe do analizy.
